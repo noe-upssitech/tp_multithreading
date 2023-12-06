@@ -17,8 +17,6 @@ class QueueManager(BaseManager):
         serializer: str = "pickle",
         ctx: BaseContext | None = None,
     ) -> None:
-        
-        super().__init__(address, authkey, serializer, ctx)
 
         self.task_queue = Queue()
         self.result_queue = Queue()
