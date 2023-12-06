@@ -19,3 +19,9 @@ class Task:
         t0 = perf_counter()
         self.x = np.dot(self.a, self.b)
         self.time = perf_counter() - t0
+
+    def getId(self):
+        return self.identifier
+    
+    def getTime(self):
+        return self.time
