@@ -1,8 +1,7 @@
-from Boss import Boss
-from Minion import Minion
+from boss import Boss
+from minion import Minion
 
 
 class QueueClient:
     def __init__(self) -> None:
-        self.Boss = Boss()
-        self.Minion = Minion()
+        pass
