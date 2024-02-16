@@ -3,8 +3,8 @@ from queueManager import QueueManager
 class QueueClient:
     def __init__(
             self, 
-            adress: str = ("127.0.0.1", 1000),
-            authkey: bytes = b"abc",
+            adress: str = ("localhost", 50000),
+            authkey: bytes = b"abc123",
         ) -> None:
         
         self.task_queue = QueueManager.register("get_tasks")
