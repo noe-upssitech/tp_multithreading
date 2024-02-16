@@ -1,7 +1,5 @@
 from multiprocessing import Queue
-from multiprocessing.context import BaseContext
 from multiprocessing.managers import BaseManager
-from task import Task
 
 import sys
 import itertools
@@ -10,33 +8,32 @@ import threading
 
 
 class QueueManager(BaseManager):
-    def __init__(
-        self,
-        address,
-        authkey: bytes,
-        serializer: str = "pickle",
-        ctx: BaseContext | None = None,
-    ) -> None:
+    def __init__(self, address, authkey):
+        super().__init__(address=address, authkey=authkey)
 
         self.task_queue = Queue()
         self.result_queue = Queue()
 
-        self.register('get_task', callable = lambda: self.task_queue)
-        self.register('get_results', callable = lambda: self.result.queue)
+        self.register('get_task_queue', callable = lambda: self.task_queue)
+        self.register('get_results_queue', callable = lambda: self.result_queue)
+
+    def serve(self):
 
         def animate():
             for c in itertools.cycle(['|', '/', '-', '\\']):
-                sys.stdout.write('\rManager created and serving forever ' + c)
+                sys.stdout.write('\rManager created and serving forever at ' + f"{self.address[0]}:{self.address[1]}" + " " + c)
                 sys.stdout.flush()
                 time.sleep(0.3)
-
+        
         t = threading.Thread(target=animate)
         t.start()
         self.get_server().serve_forever()
 
 if __name__ == "__main__":
     manager = QueueManager(
-        address = ('127.0.0.1', 50000),
-        authkey = b'abc'
+        address = ('localhost', 50000),
+        authkey = b'abc123'
     )
+
+    manager.serve()
 
