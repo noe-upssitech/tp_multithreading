@@ -11,7 +11,7 @@ class Task:
         self.b = np.random.rand(size, size)
         
         # Output matrice
-        self.x = np.zeros(size, size) # Results
+        self.x = np.zeros((size, size)) # Results
         
         self.time = 0
 

@@ -15,7 +15,7 @@ class QueueManager(BaseManager):
         self.result_queue = Queue()
 
         self.register('get_task_queue', callable = lambda: self.task_queue)
-        self.register('get_results_queue', callable = lambda: self.result_queue)
+        self.register('get_result_queue', callable = lambda: self.result_queue)
 
     def serve(self):
 

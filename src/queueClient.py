@@ -1,15 +1,17 @@
 from queueManager import QueueManager
 
 class QueueClient:
-    def __init__(
-            self, 
-            adress: str = ("localhost", 50000),
-            authkey: bytes = b"abc123",
-        ) -> None:
+    def __init__(self) -> None:
         
-        self.task_queue = QueueManager.register("get_tasks")
-        self.result_queue = QueueManager.register("get_results")
-
-        self.manager = QueueManager(address=adress, authkey=authkey)
-
+        self.manager = QueueManager(address=('localhost', 50000), authkey=b'abc123')
         self.manager.connect()
+
+        self.manager.register("get_task_queue")
+        self.task_queue = self.manager.get_task_queue()
+        
+        self.manager.register("get_result_queue")
+        self.result_queue = self.manager.get_result_queue()
+
+if __name__ == "__main__":
+    client = QueueClient()
+    print(client.task_queue)
