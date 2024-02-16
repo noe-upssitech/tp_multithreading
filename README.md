@@ -1,1 +1,1 @@
-# Lab work for the control system with vision devices class
+# Lab work for the multi-threading class
